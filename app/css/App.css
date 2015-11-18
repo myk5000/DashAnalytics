@@ -1,0 +1,14 @@
+
+body {
+    margin: 0;
+    text-align: center;
+}
+.app {
+  background-color: #FF4136;
+  height: 50px;  
+}
+
+.bap {
+  background-color: orange;
+  height: 25px;
+}
