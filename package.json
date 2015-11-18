@@ -1,7 +1,7 @@
 {
-  "name": "webpack-express-boilerplate",
+  "name": "dashboard",
   "version": "0.1.0",
-  "description": "A boilerplate for running a Webpack workflow in Node express",
+  "description": "dashboard",
   "main": "server.js",
   "repository": {
     "type": "git",
@@ -12,12 +12,12 @@
     "webpack",
     "node"
   ],
-  "author": "Christian Alfoni",
+  "author": "Mike Foulk",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/christianalfoni/webpack-express-boilerplate/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/christianalfoni/webpack-express-boilerplate",
+  "homepage": "",
   "scripts": {
     "test": "",
     "start": "babel-node server",
@@ -26,6 +26,7 @@
     "jscs": "jscs ."
   },
   "dependencies": {
+    "jsonfile": "^2.2.3",
     "react": "0.14.0-rc1 ",
     "react-dom": "0.14.0-rc1"
   },

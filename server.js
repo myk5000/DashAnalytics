@@ -5,6 +5,8 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from './webpack.config.js';
+import fs from 'fs';
+
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
@@ -30,6 +32,14 @@ if (isDeveloping) {
 
   app.use(webpackHotMiddleware(compiler));
 }
+
+//get testdata json
+var file = './app/model/testdata.json';
+console.log("\n *START* \n");
+var testdata = fs.readFileSync(file, "utf8");
+var jsondata = JSON.parse(testdata)
+console.log("HERE IT IS!!!!========> : \n"+ JSON.stringify(jsondata[0]));
+console.log("\n *EXIT* \n");
 
 app.get('*', function response(req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
