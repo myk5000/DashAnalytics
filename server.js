@@ -35,15 +35,16 @@ if (isDeveloping) {
 
 //get testdata json
 var file = './app/model/testdata.json';
-console.log("\n *START* \n");
-var testdata = fs.readFileSync(file, "utf8");
-var jsondata = JSON.parse(testdata)
-console.log("HERE IT IS!!!!========> : \n"+ JSON.stringify(jsondata[0]));
-console.log("\n *EXIT* \n");
+var jsondata = JSON.parse(fs.readFileSync(file, "utf8"));
 
-app.get('*', function response(req, res) {
+app.get('/', function response(req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
+
+app.get('/api/getdata', function response(req, res) {
+  res.send(jsondata[0]);
+});
+
 
 app.listen(port, 'localhost', function onStart(err) {
   if (err) {
