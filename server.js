@@ -36,19 +36,42 @@ if (isDeveloping) {
 //get testdata json
 var file = './app/model/testdata.json';
 var jsondata = JSON.parse(fs.readFileSync(file, "utf8"));
-
+//setup path for index.html
 app.get('/', function response(req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-app.get('/api/getdata', function response(req, res) {
-  res.send(jsondata[0]);
-});
 
 
-app.listen(port, 'localhost', function onStart(err) {
+
+var server = app.listen(port, 'localhost', function onStart(err) {
   if (err) {
     console.log(err);
   }
   console.info('==> 🌎 Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port);
 });
+
+
+//use socket io from the server side.
+
+var connections = [];
+var title = 'Untitled Presentation';
+
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function (socket) {
+    socket.once('disconnect', function() {
+    connections.splice(connections.indexOf(socket), 1);
+    socket.disconnect();
+    console.log("Disconnected: %s sockets remaining.", connections.length);
+  });
+
+  socket.emit('welcome', {
+    title: title
+  });
+
+  connections.push(socket);
+    console.log("=> Connected: %s sockets connected.", connections.length);
+});
+console.log("=>Polling server is running at 'http://localhost:3000'");
+

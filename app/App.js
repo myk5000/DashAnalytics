@@ -1,20 +1,65 @@
 import React from 'react';
 import styles from './css/App.css';
 import Header from './view_components/Header.js'
+var io = require('socket.io-client');
+
+
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {test: 'foo'};
+    //this.state = {test: 'foo'};
+
+    //set state values
+    this.state = {
+          status: 'disconnected',
+          title: 'default title from appJS'
+    }
+
+
+    //In ES6 these io methods must be bound in the constructor
+    this.connect = this.connect.bind(this);
+    this.disconnect = this.disconnect.bind(this);
+    this.welcome = this.welcome.bind(this);
+
+
   }
+
+  // getInitialState() {
+  //       return {
+  //           status: 'disconnected',
+  //           title: 'default title'
+  //       }
+  // }
+
+ componentWillMount() {
+        this.socket = io('http://localhost:3000');
+        this.socket.on('connect', this.connect);
+        this.socket.on('disconnect', this.disconnect);
+        this.socket.on('welcome', this.welcome);
+  }
+
+   connect() {
+        this.setState({ status: 'connected' });
+    }
+
+    disconnect() {
+        this.setState({ status: 'disconnected' });
+    }
+
+    welcome(serverState) {
+        this.setState({ title: serverState.title });
+    }
+
   render() {
     return (
       <div className={styles.app} >
-        bar3
-        <Header/>
+        <Header title={this.state.title} status={this.state.status}/>
+        hi from app.js        
       </div>
     );
   }
+  
 }
 
 
