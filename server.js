@@ -33,14 +33,13 @@ if (isDeveloping) {
   app.use(webpackHotMiddleware(compiler));
 }
 
-//get testdata json
+//get testdata json from file
 var file = './app/model/testdata.json';
 var jsondata = JSON.parse(fs.readFileSync(file, "utf8"));
 //setup path for index.html
 app.get('/', function response(req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
-
 
 
 
@@ -52,10 +51,15 @@ var server = app.listen(port, 'localhost', function onStart(err) {
 });
 
 
+
+//create user array for usernames in chat
+//user names will be mapped to their socket id
+var users = [];
+
 //use socket io from the server side.
 
 var connections = [];
-var title = 'Untitled Presentation';
+var title = 'Welcome user';
 
 var io = require('socket.io').listen(server);
 
@@ -67,7 +71,8 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.emit('welcome', {
-    title: title
+    title: title,
+    chartData: jsondata
   });
 
   connections.push(socket);

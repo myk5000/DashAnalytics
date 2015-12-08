@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './css/App.css';
 import Header from './view_components/Header.js'
 var io = require('socket.io-client');
+//var createFragment = require('react-addons-create-fragment');
 
 
 
@@ -13,7 +14,8 @@ export default class App extends React.Component {
     //set state values
     this.state = {
           status: 'disconnected',
-          title: 'default title from appJS'
+          title: 'default title from appJS',
+          chartData: []
     }
 
 
@@ -23,14 +25,7 @@ export default class App extends React.Component {
     this.welcome = this.welcome.bind(this);
 
 
-  }
-
-  // getInitialState() {
-  //       return {
-  //           status: 'disconnected',
-  //           title: 'default title'
-  //       }
-  // }
+  }  
 
  componentWillMount() {
         this.socket = io('http://localhost:3000');
@@ -49,13 +44,23 @@ export default class App extends React.Component {
 
     welcome(serverState) {
         this.setState({ title: serverState.title });
+        this.setState({ chartData: serverState.chartData });
+        // console.log('>>chartData : ' + JSON.parse(this.state.chartData));
     }
 
   render() {
+    console.log(this.state.chartData);
     return (
-      <div className={styles.app} >
-        <Header title={this.state.title} status={this.state.status}/>
-        hi from app.js        
+      <div className={styles.app}>
+        <Header status={this.state.status}/>
+        <ul>
+
+            {
+              this.state.chartData.map
+              (function(x){return <li key={x.index}>loan index: {x.index} has loan amount: {x.loanAmount}</li>})
+
+            }
+          </ul> 
       </div>
     );
   }
