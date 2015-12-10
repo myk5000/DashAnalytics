@@ -3,11 +3,11 @@ body {
     margin: 0;
     text-align: center;
 }
-.app {
-  background-color: #FF4136;
+.mainDiv {
+  background-color: greenyellow;
 }
 
-.bap {
-  background-color: orange;
+.header {
+  background-color: yellow;
   
 }

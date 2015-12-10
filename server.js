@@ -13,7 +13,7 @@ const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
 
 app.use(express.static(__dirname + '/dist'));
-
+console.log(">>the path: "+__dirname + '/dist');
 if (isDeveloping) {
   const compiler = webpack(config);
 

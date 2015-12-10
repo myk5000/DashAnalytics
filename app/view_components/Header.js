@@ -13,14 +13,12 @@ export default class Header extends React.Component {
 
   render() {
     return (
-    	<header>
-	      <div className={styles.bap} >
-	        <h1>header div {this.props.title}</h1>
+    	<header className={styles.header}>
+	      <div>
+	        <h3>this client is: {this.props.status}</h3>
 	      </div>
 	      <div>
-	      	<span id="connection-status">
-	      		this client is: {this.props.status}
-	      	</span>
+	      	
 	      </div>
       	</header>
     );

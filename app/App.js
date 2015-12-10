@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './css/App.css';
-import Header from './view_components/Header.js'
-var io = require('socket.io-client');
+import Header from './view_components/Header.js';
+import io from 'socket.io-client';
+import bs from 'bootstrap-webpack';
 //var createFragment = require('react-addons-create-fragment');
 
 
@@ -44,23 +45,15 @@ export default class App extends React.Component {
 
     welcome(serverState) {
         this.setState({ title: serverState.title });
-        this.setState({ chartData: serverState.chartData });
-        // console.log('>>chartData : ' + JSON.parse(this.state.chartData));
+        this.setState({ chartData: serverState.chartData });        
     }
 
   render() {
-    console.log(this.state.chartData);
+    
     return (
-      <div className={styles.app}>
+      <div className={styles.mainDiv, bs.container}>
         <Header status={this.state.status}/>
-        <ul>
-
-            {
-              this.state.chartData.map
-              (function(x){return <li key={x.index}>loan index: {x.index} has loan amount: {x.loanAmount}</li>})
-
-            }
-          </ul> 
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, quae. Sequi quisquam dolor debitis blanditiis nulla magni culpa quasi nobis explicabo nesciunt, saepe iste! Corporis hic accusamus minima, explicabo nam.
       </div>
     );
   }
